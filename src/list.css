@@ -1,0 +1,124 @@
+/* พื้นหลังท้องฟ้ายามค่ำคืน + ดวงดาว */
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 20px;
+  color: #f5f5f5;
+  background: linear-gradient(to bottom, #0d1b2a, #1b263b, #415a77);
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* ดวงดาวเคลื่อนไหว */
+body::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200%;
+  height: 200%;
+  background: transparent url("https://www.transparenttextures.com/patterns/stardust.png") repeat;
+  opacity: 0.5;
+  animation: stars 60s linear infinite;
+  pointer-events: none; /* ทำให้ input ใช้ได้ */
+  z-index: 0;           /* อยู่หลัง content */
+}
+
+@keyframes stars {
+  from { transform: translate(0, 0); }
+  to { transform: translate(-500px, -500px); }
+}
+
+/* Container ร้านหนังสือ */
+.bookstore {
+  position: relative;
+  z-index: 1; /* อยู่เหนือดวงดาว */
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* กล่อง search */
+.search-box {
+  margin-bottom: 25px;
+}
+
+.search-input {
+  padding: 10px 15px;
+  border: 1px solid #7d8597;
+  border-radius: 8px;
+  font-size: 16px;
+  width: 300px;
+  max-width: 100%;
+  background: rgba(255, 255, 255, 0.1);
+  color: #f5f5f5;
+  outline: none;
+}
+
+.search-input::placeholder {
+  color: #cbd5e1;
+}
+
+.search-input:focus {
+  border-color: #ffd700;
+  box-shadow: 0 0 8px rgba(255, 215, 0, 0.6);
+}
+
+/* List layout */
+.book-list {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+/* Card book */
+.book-card {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 14px;
+  padding: 15px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  backdrop-filter: blur(6px);
+}
+
+.book-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.7);
+}
+
+/* รูปหนังสือ */
+.book-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin: 10px 0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+}
+
+/* ข้อความใน card */
+.book-title {
+  font-size: 18px;
+  color: #ffd700;
+  margin: 0;
+}
+
+.book-author,
+.book-price {
+  font-size: 14px;
+  margin: 2px 0;
+  color: #f0e68c;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .book-list {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  }
+
+  .search-input {
+    width: 100%;
+  }
+}
